@@ -7,7 +7,7 @@ plugins {
 
 allprojects {
     group = "ua.nanit"
-    version = "1.0.16"
+    version = "1.1.0"
 }
 
 subprojects {

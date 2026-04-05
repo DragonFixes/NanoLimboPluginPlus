@@ -22,7 +22,7 @@ import ua.nanit.limbo.server.LimboServer;
 
 @Plugin(id = "nanolimbovelocity",
         name = "NanoLimboVelocity",
-        version = "1.0.16",
+        version = "1.1.0",
         authors = "bivashy, Nan1t")
 public class NanoLimboVelocity {
     static {

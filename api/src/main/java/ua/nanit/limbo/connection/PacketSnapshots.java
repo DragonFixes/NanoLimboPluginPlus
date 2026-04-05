@@ -80,6 +80,7 @@ public final class PacketSnapshots {
     public static List<PacketSnapshot> PACKETS_REGISTRY_DATA_1_21_7;
     public static List<PacketSnapshot> PACKETS_REGISTRY_DATA_1_21_9;
     public static List<PacketSnapshot> PACKETS_REGISTRY_DATA_1_21_11;
+    public static List<PacketSnapshot> PACKETS_REGISTRY_DATA_26_1;
 
     private PacketSnapshot packetFinishConfiguration;
 
@@ -273,6 +274,19 @@ public final class PacketSnapshots {
         PACKETS_REGISTRY_DATA_1_21_7 = createRegistryData(server, server.getDimensionRegistry().getCodec_1_21_7());
         PACKETS_REGISTRY_DATA_1_21_9 = createRegistryData(server, server.getDimensionRegistry().getCodec_1_21_9());
         PACKETS_REGISTRY_DATA_1_21_11 = createRegistryData(server, server.getDimensionRegistry().getCodec_1_21_11());
+        PACKETS_REGISTRY_DATA_26_1 = new ArrayList<>(PACKETS_REGISTRY_DATA_1_21_11);
+        PACKETS_REGISTRY_DATA_26_1.add(PacketSnapshot.of(PacketRegistryData.class, (version) -> {
+            PacketRegistryData worldClock = new PacketRegistryData();
+            worldClock.setDimensionRegistry(server.getDimensionRegistry());
+            worldClock.setMetadataWriter((message, ver) -> {
+                message.writeString("world_clock");
+                message.writeVarInt(1);
+                message.writeString("minecraft:overworld");
+                message.writeBoolean(true);
+                message.writeCompoundTag(CompoundBinaryTag.empty(), ver);
+            });
+            return worldClock;
+        }));
 
         packetFinishConfiguration = PacketSnapshot.of(new PacketFinishConfiguration());
 
